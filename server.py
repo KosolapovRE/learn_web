@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    page_title = 'Прогноз погоды'
+    page_title = 'Новости Python'
     weather = weather_by_city('Moscow,Russia')
     return render_template('index.html', page_title=page_title, weather=weather)
 
