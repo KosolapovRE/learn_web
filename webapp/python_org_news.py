@@ -1,4 +1,6 @@
 from datetime import datetime
+import locale
+locale.setlocale(locale.LC_ALL, "en_US")
 
 import requests
 from bs4 import BeautifulSoup
@@ -25,7 +27,7 @@ def get_python_news():
             url = news.find('a')['href']
             published = news.find('time').text
             try:
-                published = datetime.strptime(published, '%Y-%m-%d')
+                published = datetime.strptime(published, '%B %d, %Y')
             except ValueError:
                 published = datetime.now()
             save_news(title, url, published)
