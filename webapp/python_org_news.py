@@ -5,7 +5,8 @@ locale.setlocale(locale.LC_ALL, "en_US")
 import requests
 from bs4 import BeautifulSoup
 
-from webapp.model import db, News
+from webapp.db import db
+from webapp.news.models import News
 
 def get_html(url):
     try:

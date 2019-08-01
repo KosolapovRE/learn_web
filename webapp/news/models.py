@@ -1,6 +1,4 @@
-from flask_sqlalchemy import SQLAlchemy 
-
-db = SQLAlchemy()
+from webapp.db import db
 
 class News(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -11,5 +9,3 @@ class News(db.Model):
 
     def __repr__(self):
         return '<News {} {} {}>'.format(self.title, self.url, self.published)
-
-
