@@ -2,6 +2,19 @@ from flask import current_app
 import requests
 
 def weather_by_city(city_name):
+    """
+    what weather in this city.
+    
+    >>> weather_by_city("London")
+    ''
+    >>> weather_by_city(1)
+    'False'
+    >>> weather_by_city(None)
+    'False'
+    >>> weather_by_city(Москвааааааааа)
+    'False' 
+
+    """
     weather_url = current_app.config['WEATHER_URL']
     params = {
         'key': current_app.config['WEATHER_API_KEY'],
@@ -27,4 +40,6 @@ def weather_by_city(city_name):
 
 if __name__ == "__main__":
     print(weather_by_city('Moscow,Russia'))
+    import doctest
+    doctest.testmod()
     

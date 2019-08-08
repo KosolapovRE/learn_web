@@ -9,6 +9,13 @@ from webapp.db import db
 from webapp.news.models import News
 
 def get_html(url):
+    """
+    what get html.
+    
+    >>> get_html("123456")
+    'False'
+
+    """
     try:
         result = requests.get(url)
         result.raise_for_status()
@@ -16,6 +23,9 @@ def get_html(url):
     except(requests.RequestException, ValueError):
         print('Сетевая ошибка')
         return False
+
+import doctest
+doctest.testmod()
 
 def get_python_news():
     html = get_html('https://www.python.org/blogs/')
@@ -40,3 +50,5 @@ def save_news(title, url, published):
         new_news = News(title=title, url=url, published=published)
         db.session.add(new_news)
         db.session.commit()
+
+
