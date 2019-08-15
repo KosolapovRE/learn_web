@@ -2,35 +2,21 @@ from flask import current_app
 import requests
 
 def weather_by_city(city_name):
-    """
-    what weather in this city.
-    
-    >>> weather_by_city("London")
-    ''
-    >>> weather_by_city(1)
-    'False'
-    >>> weather_by_city(None)
-    'False'
-    >>> weather_by_city(Москвааааааааа)
-    'False' 
-
-    """
     weather_url = current_app.config['WEATHER_URL']
     params = {
-        'key': current_app.config['WEATHER_API_KEY'],
-        'q': city_name,
-        'format': 'json',
-        'num_of_days': 1,
-        'lang': 'ru'
+        'city': city_name,
+        'country': 'Russia',
+        'lang': 'ru',
+        'key': current_app.config['WEATHER_API_KEY']
     }
     try:
         result = requests.get(weather_url, params=params)
         result.raise_for_status()
         weather = result.json()
         if 'data' in weather:
-            if 'current_condition' in weather['data']:
+            if [0] in weather['data']:
                 try:
-                    return weather['data']['current_condition'][0]
+                    return weather['data'][0]['temp']['app_temp']
                 except(IndexError, TypeError):
                     return False
     except(requests.RequestException, ValueError):
@@ -38,8 +24,5 @@ def weather_by_city(city_name):
         return False
     return False
 
-if __name__ == "__main__":
-    print(weather_by_city('Moscow,Russia'))
-    import doctest
-    doctest.testmod()
-    
+test = weather_by_city('Moscow')
+print(test)
