@@ -24,5 +24,3 @@ def weather_by_city(city_name):
         return False
     return False
 
-test = weather_by_city('Moscow')
-print(test)
