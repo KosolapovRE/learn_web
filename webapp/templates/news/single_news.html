@@ -3,7 +3,8 @@
 {% block content %}
         <div class='row'>
             <div class='col-8 news-content'>
-               {{ news.text|safe }}
+                {% include('messages.html') %}
+                {{ news.text|safe }}
                 {% if news.comments %}
                     <h3>Комментарии:</h3>
                     {% for comment in news.comments %}
